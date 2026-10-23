@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ballon d'Or – Résultats</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/results.js"></script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/"><span class="ball"></span> Ballon d'Or · Vote</a>
+    <nav>
+      <a href="/">Voter</a>
+      <a href="/results" class="active">Résultats</a>
+      <a href="/admin">Admin</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Classement <span class="gold">Ballon d'Or</span></h1>
+    <p class="lead">Seuls les votes validés sont comptabilisés.</p>
+    <div id="msg"></div>
+    <div id="content" class="hidden">
+      <div class="stats" id="stats"></div>
+      <div class="podium" id="podium"></div>
+      <section class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="num">#</th>
+                <th>Joueur</th>
+                <th class="num">Points</th>
+                <th class="num">1<sup>res</sup> places</th>
+                <th class="num">Citations</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

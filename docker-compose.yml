@@ -1,0 +1,21 @@
+services:
+  ballon-dor:
+    build: ./app
+    container_name: ballon-dor-vote
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      # Obligatoire : mot de passe de l'interface /admin (8 caractères minimum).
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Définissez ADMIN_PASSWORD dans le fichier .env}
+      # Recommandé : clé de signature des sessions (sinon les admins sont déconnectés à chaque redémarrage).
+      SESSION_SECRET: ${SESSION_SECRET:-}
+      # Mettre à true si l'application est servie en HTTPS.
+      SECURE_COOKIES: ${SECURE_COOKIES:-false}
+      # Nombre de reverse proxies devant l'app (ex : 1 derrière Nginx/Traefik/Caddy).
+      TRUST_PROXY: ${TRUST_PROXY:-}
+    volumes:
+      - ballon-dor-data:/data
+
+volumes:
+  ballon-dor-data:

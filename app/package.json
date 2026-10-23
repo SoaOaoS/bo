@@ -1,0 +1,19 @@
+{
+  "name": "ballon-dor-vote",
+  "version": "1.0.0",
+  "description": "Application de vote pour le Ballon d'Or : chaque votant soumet son top 10, validé par un admin ou par un code d'invitation à usage unique.",
+  "private": true,
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch src/server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.js\""
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

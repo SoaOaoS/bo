@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ballon d'Or – Administration</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/admin.js"></script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/"><span class="ball"></span> Ballon d'Or · Vote</a>
+    <nav>
+      <a href="/">Voter</a>
+      <a href="/results">Résultats</a>
+      <a href="/admin" class="active">Admin</a>
+    </nav>
+  </header>
+  <main>
+    <section id="login" class="card login-box hidden">
+      <h2>Connexion administrateur</h2>
+      <form id="login-form">
+        <div class="form-row">
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" autocomplete="current-password" required>
+        </div>
+        <div id="login-msg"></div>
+        <button class="primary" type="submit">Se connecter</button>
+      </form>
+    </section>
+
+    <section id="panel" class="hidden">
+      <div class="row mb">
+        <h1 class="grow">Administration</h1>
+        <button id="logout" type="button">Se déconnecter</button>
+      </div>
+      <div class="tabs" id="tabs">
+        <button type="button" data-tab="votes" class="active">Votes <span id="pending-count"></span></button>
+        <button type="button" data-tab="codes">Codes d'invitation</button>
+        <button type="button" data-tab="players">Joueurs</button>
+        <button type="button" data-tab="settings">Paramètres</button>
+      </div>
+      <div id="msg"></div>
+
+      <div data-panel="votes">
+        <div class="row mb">
+          <div class="chips" id="vote-filters"></div>
+          <span class="grow"></span>
+          <a class="btn" href="/api/admin/results.csv">Exporter les résultats (CSV)</a>
+        </div>
+        <div id="votes"></div>
+      </div>
+
+      <div data-panel="codes" class="hidden">
+        <div class="card mb">
+          <h2>Générer des codes</h2>
+          <p class="hint">Chaque code ne sert qu'une fois. Distribuez-en un par personne : un vote avec un code valide est validé automatiquement, sans intervention de votre part.</p>
+          <form id="codes-form" class="row">
+            <input id="codes-count" type="number" min="1" max="500" value="10" aria-label="Nombre de codes">
+            <input id="codes-label" type="text" maxlength="60" placeholder="Libellé (ex : Famille, Bureau…)" aria-label="Libellé">
+            <button class="primary" type="submit">Générer</button>
+          </form>
+        </div>
+        <div class="card">
+          <div class="row mb">
+            <h2 class="grow">Codes</h2>
+            <button type="button" id="copy-codes">Copier les codes non utilisés</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Code</th><th>Libellé</th><th>Statut</th><th></th></tr></thead>
+              <tbody id="codes" class="codes-list"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div data-panel="players" class="hidden">
+        <div class="card mb">
+          <h2 id="player-form-title">Ajouter un joueur</h2>
+          <form id="player-form" class="row">
+            <input type="hidden" id="player-id">
+            <input id="player-name" type="text" placeholder="Nom" required maxlength="80" aria-label="Nom">
+            <input id="player-club" type="text" placeholder="Club" maxlength="80" aria-label="Club">
+            <input id="player-nationality" type="text" placeholder="Nationalité" maxlength="60" aria-label="Nationalité">
+            <input id="player-country" type="text" placeholder="Code pays (fr, es, gb-eng…)" maxlength="10" aria-label="Code pays">
+            <select id="player-position" aria-label="Poste">
+              <option value="">Poste</option>
+              <option value="GK">Gardien</option>
+              <option value="DEF">Défenseur</option>
+              <option value="MIL">Milieu</option>
+              <option value="ATT">Attaquant</option>
+            </select>
+            <button class="primary" type="submit">Enregistrer</button>
+            <button type="button" id="player-cancel" class="hidden">Annuler</button>
+          </form>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Joueur</th><th>Club</th><th>Poste</th><th>Visible</th><th></th></tr></thead>
+              <tbody id="players"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div data-panel="settings" class="hidden">
+        <div class="card">
+          <div class="toggle">
+            <div class="t"><strong>Votes ouverts</strong><div class="hint">Autoriser les nouveaux votes.</div></div>
+            <input type="checkbox" id="set-voting">
+          </div>
+          <div class="toggle">
+            <div class="t"><strong>Résultats publics</strong><div class="hint">Afficher le classement à tout le monde (sinon visible uniquement par l'admin).</div></div>
+            <input type="checkbox" id="set-results">
+          </div>
+          <div class="toggle">
+            <div class="t"><strong>Codes d'invitation</strong><div class="hint">Facultatif : un code valide valide le vote automatiquement, sinon validation manuelle.<br>Obligatoire : impossible de voter sans code.<br>Désactivé : tous les votes passent par votre validation.</div></div>
+            <select id="set-code-mode">
+              <option value="optional">Facultatif</option>
+              <option value="required">Obligatoire</option>
+              <option value="disabled">Désactivé</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ballon d'Or – Votez</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/vote.js"></script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/"><span class="ball"></span> Ballon d'Or · Vote</a>
+    <nav>
+      <a href="/" class="active">Voter</a>
+      <a href="/results">Résultats</a>
+      <a href="/admin">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Votre <span class="gold">top 10</span> du Ballon d'Or 2026</h1>
+    <p class="lead">Choisissez 10 joueurs parmi les 30 nommés et classez-les. 1<sup>er</sup> = 15 pts, 2<sup>e</sup> = 12, 3<sup>e</sup> = 10, 4<sup>e</sup> = 8, 5<sup>e</sup> = 7, 6<sup>e</sup> = 5, 7<sup>e</sup> = 4, 8<sup>e</sup> = 3, 9<sup>e</sup> = 2, 10<sup>e</sup> = 1. Un seul vote par personne.</p>
+
+    <div id="global-msg"></div>
+
+    <section id="already" class="card hidden"></section>
+
+    <div id="vote-area" class="grid-vote hidden">
+      <section class="card">
+        <h2>Les nommés</h2>
+        <div class="toolbar">
+          <input id="search" type="text" placeholder="Rechercher un joueur, un club, un pays…" aria-label="Rechercher">
+        </div>
+        <div class="chips mb" id="filters"></div>
+        <div class="pool" id="pool"></div>
+      </section>
+
+      <section class="card sticky" id="ranking">
+        <h2>Mon classement <span class="hint" id="count"></span></h2>
+        <p class="hint">Cliquez sur un joueur pour l'ajouter. Glissez-déposez ou utilisez les flèches pour réordonner.</p>
+        <ol class="slots" id="slots"></ol>
+
+        <form id="vote-form" class="mt">
+          <div class="form-row">
+            <label for="firstName">Votre prénom</label>
+            <input id="firstName" name="firstName" type="text" maxlength="40" autocomplete="given-name" required>
+          </div>
+          <div class="form-row" id="code-row">
+            <label for="code">Code d'invitation <span id="code-optional">(facultatif)</span></label>
+            <input id="code" name="code" type="text" maxlength="12" placeholder="XXXX-XXXX" autocomplete="off">
+            <span class="hint" id="code-hint">Avec un code valide, votre vote est comptabilisé immédiatement. Sans code, il sera validé par un administrateur.</span>
+          </div>
+          <div id="form-msg"></div>
+          <button class="primary" type="submit" id="submit" disabled>Valider mon vote</button>
+        </form>
+      </section>
+    </div>
+    <button type="button" id="jump" class="primary jump hidden"></button>
+  </main>
+  <footer>Liste des nommés : France Football, 8 septembre 2026 · Cérémonie le 26 octobre 2026</footer>
+</body>
+</html>
